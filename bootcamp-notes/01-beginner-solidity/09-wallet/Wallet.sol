@@ -12,6 +12,7 @@ contract EtherWallet {
 
     function withdraw(uint256 _amount) external {
         require(msg.sender == owner, "caller is not owner");
+        // msg.sender is cheaper than owner -> not state var
         payable(msg.sender).transfer(_amount);
     }
 
