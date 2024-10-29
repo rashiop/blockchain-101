@@ -34,13 +34,13 @@ contract Game is IERC721Receiver {
     uint256 tokenId,
     bytes calldata data
   ) external returns(bytes4) {
+    originalOwner[tokenId] = msg.sender;
     return IERC721Receiver.onERC721Received.selector;
   }
 
   // transfer their nft to this contract
   // they cant trf others token as ERC721 already handle that
   function depositNFT(uint256 tokenId) external {
-    originalOwner[tokenId] = msg.sender;
     itemNFT.safeTransfer(msg.sender, address(this), tokenId);
   }
 
